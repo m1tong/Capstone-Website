@@ -1,4 +1,4 @@
-by Michelle Tong (m1tong@ucsd.edu), Yuyang Pang, Hang Liu, Vivian Chen
+by Michelle Tong (m1tong@ucsd.edu), Yuyang Pang (yupang@ucsd.edu) , Hang Liu (hal064@ucsd.edu) , Vivian Chen (vnchen@ucsd.edu)
 
 ---
 
