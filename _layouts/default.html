@@ -1,46 +1,31 @@
 <!DOCTYPE html>
-<html>
-	<head>
-		<title>{{ page.title }}</title>
-		<!-- link to main stylesheet -->
-		<link rel="stylesheet" type="text/css" href="/css/main.css">
-	</head>
-	<body>
-		<nav>
-    		<ul>
-        		<li><a href="/">Home</a></li>
-			<li><a href="https://github.com/kkw002/Quarter2Project">Project Repo</a></li>
-			<li><a href="https://github.com/kkw002/kkw002.github.io">Website Repo</a></li>
-    		</ul>
-		</nav>
-		<div class="container">
-    		{{ content }}
-		</div>
-		<div class="abstract">
-			<h2>Abstract</h2>
-			<p>Categorizing types of credit transactions is a key aspect of understanding credit users, 
-				detecting suspicious activity, and preventing fraud. Using natural language processing, 
-				a transaction’s memo can be analyzed and categorized into a larger category. 
-				In this paper, we attempt to build a model that uses NLP methods to categorize credit transactions. 
-				We attempt several methods for cleaning the text to extract features, before categorizing the transactions.</p>
-		</div>
-		<div class="introduction">
-			<h2>Introduction</h2>
-			<p>Credit scoring is a system creditors use to predict whether someone is worthy of receiving a loan. Given the sheer amount of credit seekers, it is impossible to evaluate each case on a personalized basis. Instead, there are automated methods to predict someone's creditworthiness. Linear regression was used for these purposes starting in the 1940s. Today, predictive classification methods are generally used by making use of more advanced personalized models that can learn from vast amounts of data.</p>
-			<p>Statistical methods, such as logistic regression, have been widely used in credit scoring techniques and applications. More advanced techniques, such as neural networks, have also proved useful in building scoring models. Thus far, the literature has shown that both techniques, amongst other statistical methods, lead to very similar accuracies in predicting creditworthiness. Additionally, numerous evaluation criteria, such as Gini coefficients and ROC curves are used to evaluate the limitations and effectiveness of scoring models.</p>
-			<p>For these cases, it is useful to have historical data that consists of credit seekers, whether or not they're delinquent, their annual income, and their demographics, such as age, gender, city/state of residence, etc. In our case, the data consisted of a subset of about 50,000 datapoints, and 832 features, sourced from our industry partner, Petal. We have the aforementioned data of each time someone applied for a Petal card. In most cases, and in our case, the vast majority of the datapoints will represent credit seekers who are not delinquent. Thus, to avoid naive predictions due to imbalanced data (i.e., a model that just predicts everyone as creditworthy), cost-sensitive methods ought to be used, and/or data manipulation techniques that accentuate the correlations between features and the rare class (not creditworthy) so that the model may represent the ground truth better.</p>
-		</div>
-		<div class="methods">
-			<h2>Methods</h2>
-			<img class='image' src='/images/Capture.JPG'>
-			<p>In order to begin the analysis on the data set, we first modified the memo column within the dataset by setting the words to lower case. We used regular expressions to remove any punctuation, such as commas, backslashes, etc from the phrases in the memo column. Additionally, we also removed any digits that were in the sentences. There are some cases where including them in the cleaned format of the dataset would lead to better categorization, but removing them is better overall for the model. We also added several features from the transaction date column, specifically adding in the week day and month.</p>
-			<img class='image' src='/images/tf-idf-2-1-1024x375.png'>
-			<li><a href="https://www.seoquantum.com/sites/default/files/tf-idf-2-1-1024x375.png">Source</a></li>
-			<p>We then used term frequency-inverse document frequency or TF-IDF with the stop words argument set to English and the ngram range set to (1,3) in order to remove any unimportant words, as well as capturing unigrams, bigrams, and trigrams. This allows us to get a more accurate prediction from the words in the memo. After splitting the dataset into training and validation sets, we fit and transformed the training set using the tf-idf technique, and then used a logistic regression model to categorize the model. In order to score how good the model was, we used the accuracy metric from sk-learn. The accuracy that we received was 0.86. </p>
-		</div>
-		<div class="discussion">
-			<h2>Discussion</h2>
-			<p>By utilizing a combination of TF-IDF,feature engineering and a logistic regression model, we were able to achieve an accuracy score of 0.86, which reveals that our model can predict the correct category of the transaction very often. However, we need to take into account the limitations of our model. For one, the lack of features in the original dataset led to the need to create additional features. If the logistic regression model was given more features that were not engineered, it could predict categories of memos with a higher accuracy. Additionally, the lack of a holdout set to compare the training dataset with leads possible overfitting by the model. The model may tend to overfit on the training data, and when tested against data that it hasn't seen before, may underperform.  </p>
-		</div>
-	</body>
+<html lang="en-us">
+
+  {% include head.html %}
+
+  <body>
+
+    {% include sidebar.html %}
+
+    <!-- Wrap is the content to shift when toggling the sidebar. We wrap the
+         content to avoid any CSS collisions with our real content. -->
+    <div class="wrap">
+      <div class="masthead">
+        <div class="container">
+          <h3 class="masthead-title">
+            <a href="{{ site.baseurl }}/" title="Home">{{ site.title }}</a>
+            <small>{{ site.tagline }}</small>
+          </h3>
+        </div>
+      </div>
+
+      <div class="container content">
+        {{ content }}
+      </div>
+    </div>
+
+    <label for="sidebar-checkbox" class="sidebar-toggle"></label>
+
+    <script src='{{ site.baseurl }}/public/js/script.js'></script>
+  </body>
 </html>
